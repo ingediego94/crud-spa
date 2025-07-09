@@ -17,7 +17,10 @@
     </nav>
 
     <main id="content">
-        <section>
+        <section class="productsRegister">
+
+            <h2>Registro de nuevos productos</h2>
+
             <form id="productForm">
                 <div class="mb-3">
                     <label for="id" class="form-label">ID</label>
@@ -37,10 +40,35 @@
                     <input id="cantidad" type="number" class="form-control" >
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Crear</button>
             </form>
 
         </section>
+
+
+        <!-- Table to print registers -->
+         <section class="tablaProductos">
+
+            <h2>Base de datos de productos registrados.</h2>
+
+            <table class="table table-striped" id="showProductsTable">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                    </tr>
+                </thead>
+
+                <!-- Empty dynamic body to add each register -->
+                <tbody>
+
+                </tbody>
+
+
+                </table>
+         </section>
     </main>
 
 </body>

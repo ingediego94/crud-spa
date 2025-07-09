@@ -2,7 +2,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h1{
+h1, h2{
     text-align: center;
 }
 
@@ -11,13 +11,27 @@ nav{
     justify-content: space-around;
 }
 
-#productForm{
+.productsRegister{
     border: 1px solid gray;
     padding: 3rem;
     margin: 1rem;
     width: 70vw;
 }
+/* 
+#productForm{
+    border: 1px solid gray;
+    padding: 3rem;
+    margin: 1rem;
+    width: 70vw;
+} */
 
 .form-control{
     width: 10vw;
+}
+
+.tablaProductos{
+    border: 1px solid gray;
+    padding: 3rem;
+    margin: 1rem;
+    width: 70vw;
 }

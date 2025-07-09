@@ -1,34 +1,46 @@
 {
   "products": [
     {
-      "id": 1,
-      "producto": "camisa",
-      "precio": 425,
-      "cantidad": 4
-    },
-    {
-      "id": 2,
+      "id": "2",
       "producto": "jeans",
       "precio": 220,
       "cantidad": 4
     },
     {
-      "id": 3,
+      "id": "3",
       "producto": "pantalon",
       "precio": 222,
       "cantidad": 1
     },
     {
-      "id": 4,
-      "producto": "don ramon",
-      "precio": 800,
-      "cantidad": 1
+      "id": "1",
+      "producto": "pato",
+      "precio": 12,
+      "cantidad": 1000
     },
     {
-      "id": 6,
-      "producto": "foca",
-      "precio": 1000,
-      "cantidad": 2
+      "id": "",
+      "producto": "",
+      "precio": null,
+      "cantidad": null
+    },
+    {
+      "id": "4",
+      "producto": "ganso",
+      "precio": 5000,
+      "cantidad": 3
+    },
+    {
+      "id": "5",
+      "producto": "manzana",
+      "precio": 2500,
+      "cantidad": 3
+    },
+    {
+      "id": "7",
+      "producto": "hotel",
+      "precio": 3444,
+      "cantidad": 1
     }
   ]
 }
