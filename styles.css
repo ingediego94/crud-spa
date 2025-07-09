@@ -10,3 +10,14 @@ nav{
     display: flex;
     justify-content: space-around;
 }
+
+#productForm{
+    border: 1px solid gray;
+    padding: 3rem;
+    margin: 1rem;
+    width: 70vw;
+}
+
+.form-control{
+    width: 10vw;
+}

@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "producto": "camisa",
+      "precio": 425,
+      "cantidad": 4
+    },
+    {
+      "id": 2,
+      "producto": "jeans",
+      "precio": 220,
+      "cantidad": 4
+    },
+    {
+      "id": 3,
+      "producto": "pantalon",
+      "precio": 222,
+      "cantidad": 1
+    },
+    {
+      "id": 4,
+      "producto": "mesa",
+      "precio": 65,
+      "cantidad": 2
+    }
+  ]
+}

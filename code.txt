@@ -1,0 +1,98 @@
+<script>
+document.getElementById('productoForm').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Evita el comportamiento por defecto
+
+    const id = document.getElementById('id').value;
+    const producto = document.getElementById('producto').value;
+    const precio = document.getElementById('precio').value;
+    const cantidad = document.getElementById('cantidad').value;
+
+    const data = {
+        id: parseInt(id),
+        producto: producto,
+        precio: parseFloat(precio),
+        cantidad: parseInt(cantidad)
+    };
+
+    try {
+        const resultado = await crearProducto(data);
+        console.log('Producto creado:', resultado);
+    } catch (error) {
+        console.error('Error al crear:', error);
+    }
+});
+
+// Crear producto - POST
+async function crearProducto(data) {
+    const response = await fetch('https://tu-api.com/productos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    return await response.json();
+}
+
+// Obtener productos - GET
+async function obtenerProductos() {
+    try {
+        const response = await fetch('https://tu-api.com/productos');
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Lista de productos:', data);
+    } catch (error) {
+        console.error('Error al obtener productos:', error);
+    }
+}
+
+// Actualizar producto - PUT
+async function actualizarProducto(data) {
+    try {
+        const response = await fetch(`https://tu-api.com/productos/${data.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Producto actualizado:', result);
+    } catch (error) {
+        console.error('Error al actualizar:', error);
+    }
+}
+
+// Eliminar producto - DELETE
+async function eliminarProducto(id) {
+    try {
+        const response = await fetch(`https://tu-api.com/productos/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Producto eliminado:', result);
+    } catch (error) {
+        console.error('Error al eliminar:', error);
+    }
+}
+</script>
+
+
+https://www.youtube.com/watch?v=Gbv0KDPK0w8

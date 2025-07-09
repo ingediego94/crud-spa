@@ -1,17 +1,60 @@
-document.getElementById('productForm').addEventListener('submit', function(event){
-    event.preventDefault();     // previene el envio del fomulario.
+const url = "http://localhost:3301/products";
+
+document.getElementById('productForm').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Evita el comportamiento por defecto
 
     const id = document.getElementById('id').value;
     const producto = document.getElementById('producto').value;
     const precio = document.getElementById('precio').value;
     const cantidad = document.getElementById('cantidad').value;
 
-    const newProduct = {
+    const data = {
         id: parseInt(id),
         producto: producto,
         precio: parseFloat(precio),
         cantidad: parseInt(cantidad)
     };
 
-    addProduct(newProduct);
+    try {
+        const resultado = await addProduct(data);
+        console.log('Producto creado:', resultado);
+    } catch (error) {
+        console.info('Error al crear:', error);
+    }
 });
+
+// GET method
+async function getProduct(){
+    try{
+        const response = await fetch("http://localhost:3301/products");
+        if(!response.ok){
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        // console.log(resultado.status);   // confirma respuesta del servidor.
+        const result = await response.json();
+        console.log("Lista de productos: ", result);
+    } catch (error){
+        console.info('Error al obtener los datos: ', error);
+    }
+    
+};
+ getProduct();
+
+ // POST method
+ async function addProduct(product) {
+    
+    const response = fetch("http://localhost:3301/products", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+    });
+
+    if(!response.ok){
+        throw new Error(`Error Http: ${response.status}`);
+    };
+
+    return await response.json;
+ }
+
