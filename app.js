@@ -18,6 +18,10 @@ document.getElementById('productForm').addEventListener('submit', async function
     try {
         const resultado = await addProduct(data);
         console.log('Producto creado:', resultado);
+
+        // ✅ Cleaning the form
+        document.getElementById('productForm').reset();
+
     } catch (error) {
         console.info('Error al crear:', error);
     }
@@ -40,21 +44,44 @@ async function getProduct(){
 };
  getProduct();
 
+
  // POST method
  async function addProduct(product) {
-    
-    const response = fetch("http://localhost:3301/products", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(product)
-    });
+    try{
+            
+        const response = await fetch("http://localhost:3301/products", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        });
 
-    if(!response.ok){
-        throw new Error(`Error Http: ${response.status}`);
-    };
+        if(!response.ok){
+            throw new Error(`Error Http: ${response.status}`);
+        };
 
-    return await response.json;
+        const result = await response.json();
+        console.log("Agregado con exito.");
+        return result;
+
+    } catch(error){
+        console.log("Se ha presentado un error." ,error);
+        throw error;
+    }
  }
 
+
+//  // PUT method
+//  async function updateProducts(productToUpdate) {
+    
+//     const response = await fetch(`http://localhost:3301/products, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(response)
+//     })
+
+
+//  }
