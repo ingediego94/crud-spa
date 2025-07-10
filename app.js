@@ -1,7 +1,17 @@
 const url = "http://localhost:3301/products";
 
-document.getElementById('productForm').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Evita el comportamiento por defecto
+// Function to capture data from form once this has been charged on DOM
+
+function initCrearProducto() {
+  const form = document.getElementById('productForm');
+
+  if (!form) {
+    console.warn('No se encontró el formulario de producto en el DOM.');
+    return;
+  }
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
 
     const id = document.getElementById('id').value;
     const producto = document.getElementById('producto').value;
@@ -9,26 +19,23 @@ document.getElementById('productForm').addEventListener('submit', async function
     const cantidad = document.getElementById('cantidad').value;
 
     const data = {
-        id: String(id),
-        producto: producto,
-        precio: parseFloat(precio),
-        cantidad: parseInt(cantidad)
+      id: String(id),
+      producto: producto,
+      precio: parseFloat(precio),
+      cantidad: parseInt(cantidad)
     };
 
     try {
-        const resultado = await addProduct(data);
-        console.log('Producto creado:', resultado);
-
-        // ✅ Cleaning the form
-        document.getElementById('productForm').reset();
-
-        // refreshing table content.
-        await getProduct();
-
+      const resultado = await addProduct(data);
+      console.log('Producto creado:', resultado);
+      form.reset();
+      await getProduct();
     } catch (error) {
-        console.info('Error al crear:', error);
+      console.info('Error al crear:', error);
     }
-});
+  });
+}
+
 
 // GET method
 async function getProduct(){
@@ -51,6 +58,10 @@ async function getProduct(){
         //         <td>${product.producto}</td>
         //         <td>${product.precio}</td>
         //         <td>${product.cantidad}</td>
+        //         <td>
+        //             <button class="btn btn-danger btn-sm delete-btn" data-id="${product.id}">Eliminar</button>
+        //             <button class="btn btn-primary btn-sm edit-btn" data-id="${product.id}">Editar</button>
+        //         </td>
         //     </tr>
         //     `;
         // });
@@ -58,7 +69,7 @@ async function getProduct(){
         //******************* */
 
 
-                if (Array.isArray(result)) {
+            if (Array.isArray(result)) {
             let html = '';
             result.forEach(product => {
                 html += `
@@ -67,6 +78,10 @@ async function getProduct(){
                     <td>${product.producto}</td>
                     <td>${product.precio}</td>
                     <td>${product.cantidad}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="${product.id}">Eliminar</button>
+                        <button class="btn btn-primary btn-sm edit-btn" data-id="${product.id}">Editar</button>
+                    </td>
                 </tr>
                 `;
             });
@@ -160,7 +175,7 @@ function validateProduct(product){
  // DELETE method
  async function deleteProducts(id) {
     try{
-        const response = fetch(`${url}/${id}`, {
+        const response = await fetch(`${url}/${id}`, {
             method: 'DELETE'
         });
 
@@ -169,7 +184,7 @@ function validateProduct(product){
         }
 
         const result = await response.json();
-        console.log("Producto eliminado: ", result);
+        alert("Producto eliminado: ", result);
     }catch(error){
         throw new Error('Error al eliminar: ', error);
     }
@@ -177,5 +192,19 @@ function validateProduct(product){
 
  }
 
+document.addEventListener('click', async function (event) {
+    if (event.target.classList.contains('delete-btn')) {
+        const id = event.target.getAttribute('data-id');
+        
+        if (confirm(`¿Estás seguro de que deseas eliminar el producto con ID ${id}?`)) {
+            try {
+                await deleteProducts(id);
+                await getProduct(); // refresca la tabla
+            } catch (err) {
+                console.error('Error eliminando producto:', err);
+            }
+        }
+    }
+});
 
 
