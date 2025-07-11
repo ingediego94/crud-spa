@@ -25,7 +25,7 @@ function loadView(nameOfView) {
       }
 
       if (nameOfView === 'consultarProductos') {
-        getProduct(); // Llama la función para listar productos
+        getProducts(); // Llama la función para listar productos
       }
       
     })

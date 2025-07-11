@@ -29,7 +29,7 @@ function initCrearProducto() {
       const resultado = await addProduct(data);
       console.log('Producto creado:', resultado);
       form.reset();
-      await getProduct();
+      await getProducts();
     } catch (error) {
       console.info('Error al crear:', error);
     }
@@ -38,7 +38,7 @@ function initCrearProducto() {
 
 
 // GET method
-async function getProduct(){
+async function getProducts(){
     try{
         const response = await fetch(url);
 
@@ -97,7 +97,7 @@ async function getProduct(){
     }
     
 };
- getProduct();
+ getProducts();
 
 
  // POST method
@@ -199,12 +199,47 @@ document.addEventListener('click', async function (event) {
         if (confirm(`¿Estás seguro de que deseas eliminar el producto con ID ${id}?`)) {
             try {
                 await deleteProducts(id);
-                await getProduct(); // refresca la tabla
+                await getProducts(); // refresca la tabla
             } catch (err) {
                 console.error('Error eliminando producto:', err);
             }
         }
     }
+
+    if (event.target.classList.contains('edit-btn')) {
+        const id = event.target.getAttribute('data-id');
+        const container = document.getElementById('content');
+
+        try {
+            const response = await fetch(`${url}/${id}`);
+            const data = await response.json();
+
+            container.innerHTML = `
+                <form id="edit-form"><input type="text" value=${data.producto} placeholder="${data.producto}" /><input type="number" value=${data.precio} placeholder="${data.precio}" /><input type="number" value=${data.cantidad} placeholder="${data.cantidad}" /><button type="submit">Submit</button></form>
+            `
+
+            const form = document.getElementById('edit-form')
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const childrens = form.childNodes;
+
+                const newProduct = {
+                    id,
+                    producto: childrens[0].value,
+                    precio: childrens[1].value,
+                    cantidad: childrens[2].value
+                }
+
+                updateProducts(newProduct)
+                .then(res => window.location.reload())
+                .catch(err => console.error(err))
+            })
+
+        } catch (err) {
+
+        }
+
+    }
 });
-
-
