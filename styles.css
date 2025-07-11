@@ -25,6 +25,10 @@ nav{
     width: 70vw;
 } */
 
+.paginaInicio{
+    margin: 2rem;
+}
+
 .form-control{
     width: 10vw;
 }
