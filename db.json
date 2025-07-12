@@ -1,3 +1,10 @@
 {
-  "products": []
+  "products": [
+    {
+      "id": "1",
+      "producto": "Mouse",
+      "precio": 453033,
+      "cantidad": 2
+    }
+  ]
 }

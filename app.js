@@ -79,8 +79,10 @@ async function getProducts(){
                     <td>${product.precio}</td>
                     <td>${product.cantidad}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm delete-btn" data-id="${product.id}">Eliminar</button>
                         <button class="btn btn-primary btn-sm edit-btn" data-id="${product.id}">Editar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="${product.id}">Eliminar</button>
                     </td>
                 </tr>
                 `;
